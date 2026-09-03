@@ -24,6 +24,11 @@ pipeline {
         stage('Test'){
             steps {
                 echo 'Test stage'
+                sh '''
+                    ls -al
+                    cd build
+                    ls -al
+                '''
             }
         }
     }
