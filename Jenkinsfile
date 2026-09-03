@@ -8,7 +8,7 @@ pipeline {
 
     stages {
 
-        stage('Build'){
+        stage('Build') {
             steps {
                 sh '''
                     ls -al
@@ -20,7 +20,8 @@ pipeline {
                 '''
             }
         }
-        stage('Test'){
+
+        stage('Test') {
             steps {
                 echo 'Test stage'
                 sh '''
@@ -29,11 +30,13 @@ pipeline {
                 '''
             }
         }
-        stage('E2E'){
+
+        stage('E2E') {
             steps {
                 sh '''
                     npm install serve
-                    node_modules/.bin/serve -s build & sleep 10
+                    ./node_modules/.bin/serve -s build &
+                    sleep 10
                     npx playwright test
                 '''
             }
