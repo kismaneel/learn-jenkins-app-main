@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+
         stage('Build') {
             agent {
                 docker {
@@ -18,6 +19,11 @@ pipeline {
                     npm run build
                     ls -al
                 '''
+            }
+        }
+        stage('Test'){
+            steps {
+                echo 'Test stage'
             }
         }
     }
