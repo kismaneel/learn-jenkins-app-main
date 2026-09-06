@@ -48,7 +48,7 @@ pipeline {
             }
         }
 
-        stage('stage') {
+        stage('Deploy') {
             steps {
                 sh '''
                     npm install netlify-cli@20.1.1
@@ -56,6 +56,17 @@ pipeline {
                     echo "프로젝트 배포중... 사이트ID : $NETLIFY_SITE_ID"
                     node_modules/.bin/netlify status
                     node_modules/.bin/netlify deploy --dir=build --prod
+                '''
+            }
+        }
+
+        stage('Prod E2E') {
+            environment {
+                CI_ENVIRONMENT_URL = 'https://flourishing-pie-e8b88b.netlify.app'
+            }
+            steps {
+                sh '''
+                    npx playwright test --reporter=html
                 '''
             }
         }
