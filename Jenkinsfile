@@ -41,6 +41,15 @@ pipeline {
                 '''
             }
         }
+
+        stage('stage') {
+            steps {
+                sh '''
+                    npm install -g netlify-cli@20.1.1
+                    netlify --version
+                '''
+            }
+        }
     }
 
     post {
